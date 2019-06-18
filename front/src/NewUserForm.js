@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class NewUserForm extends Component {
   constructor(props) {
@@ -13,10 +14,12 @@ class NewUserForm extends Component {
   }
 
   handleChange(e) {
-    const { name, value } = e.target;
-    this.setState({
-      [name]: value
-    });
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'UPDATE_FORM',
+      name: e.target.name,
+      value: e.target.value,
+    })
   }
 
   handleSubmit(e) {
@@ -25,6 +28,8 @@ class NewUserForm extends Component {
   }
 
   render() {
+    const { firstname, lastname, avatar } = this.props;
+
     return (
       <form onSubmit={this.handleSubmit}>
         <h2>New user</h2>
@@ -34,6 +39,7 @@ class NewUserForm extends Component {
           id="firstname"
           name="firstname"
           onChange={this.handleChange}
+          value={firstname}
         />
 
         <label htmlFor="lastname">Last name</label>
@@ -41,6 +47,7 @@ class NewUserForm extends Component {
           id="lastname"
           name="lastname"
           onChange={this.handleChange}
+          value={lastname}
         />
 
         <label htmlFor="avatar">Avatar</label>
@@ -48,6 +55,7 @@ class NewUserForm extends Component {
           id="avatar"
           name="avatar"
           onChange={this.handleChange}
+          value={avatar}
         />
 
         <button className="btn btn-primary" type="submit">Submit</button>
@@ -56,4 +64,13 @@ class NewUserForm extends Component {
   }
 }
 
-export default NewUserForm;
+const mapStateToProps = (state) => state.form;
+
+// const mapStateToProps = state=> {
+//   return {
+//     fistname: state.form.firstname,
+//     last...
+//   }
+// }
+
+export default connect(mapStateToProps)(NewUserForm);
