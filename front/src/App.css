@@ -1,0 +1,15 @@
+input, label {
+  display: block;
+}
+
+input {
+  padding: 2px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  width: 80%;
+  margin-bottom: 10px;
+}
+
+.media img {
+  max-width: 32px;
+}
