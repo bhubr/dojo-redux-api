@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS dojo_api_redux.user (
   avatar VARCHAR(128) NULL
 );
 
-INSERT INTO `user` (`id`, `firstname`, `lastname`, `gender`, `avatar`) VALUES
+INSERT INTO dojo_api_redux.user (`id`, `firstname`, `lastname`, `gender`, `avatar`) VALUES
 (1, 'Sophia', 'Deschamps', 'female', 'https://randomuser.me/api/portraits/women/93.jpg'),
 (2, 'Louis', 'Martinez', 'male', 'https://randomuser.me/api/portraits/men/3.jpg'),
 (3, 'Lana', 'Martin', 'female', 'https://randomuser.me/api/portraits/women/47.jpg'),

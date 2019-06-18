@@ -6,8 +6,9 @@
 
 ## Initialisation
 
-Lancer avec MySQL en root:
+Lancer avec MySQL en root (depuis `back`):
 
 ```
 mysql -uroot -p < sql/init.sql
 ```
+
