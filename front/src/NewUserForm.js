@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
+import { CREATE_USER_SUCCESS } from './actions/types';
 
 class NewUserForm extends Component {
   constructor(props) {
@@ -23,8 +25,24 @@ class NewUserForm extends Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
+
+    const { firstname, lastname, avatar, dispatch } = this.props;
+    axios.post('/api/users',
+      {
+        firstname,
+        lastname,
+        avatar
+      })
+      .then(res => res.data)
+      .then(newUser => {
+        dispatch({
+          type: CREATE_USER_SUCCESS,
+          newUser,
+        })
+      })
+    //.catch(err => dispatch({type:'CREATE_USER_FAILURE', message:err.message))
     console.log(this.state);
+    e.preventDefault();
   }
 
   render() {
@@ -58,7 +76,10 @@ class NewUserForm extends Component {
           value={avatar}
         />
 
-        <button className="btn btn-primary" type="submit">Submit</button>
+        <button
+          className="btn btn-primary"
+          type="submit"
+        >Submit</button>
       </form>
     );
   }

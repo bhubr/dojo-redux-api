@@ -3,21 +3,23 @@ import axios from 'axios';
 import UsersList from './UsersList';
 import NewUserForm from './NewUserForm';
 import './App.css';
+import { connect } from 'react-redux';
+import { GET_USERS_SUCCESS } from './actions/types';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      users: []
-    };
-  }
   componentDidMount() {
+    const { dispatch } = this.props;
     axios.get('/api/users')
       .then(res => res.data)
-      .then(users => this.setState({ users }));
+      .then(users => dispatch({
+        type: GET_USERS_SUCCESS,
+        users
+      })
+      );
   }
+
   render() {
-    const { users } = this.state;
+    const { users } = this.props;
     return (
       <div className="container">
         <div className="row">
@@ -33,4 +35,6 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({ users: state.users });
+
+export default connect(mapStateToProps)(App);
